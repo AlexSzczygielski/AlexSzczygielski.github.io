@@ -6,11 +6,9 @@ const projects = (await getCollection('projects'))
   .sort((a, b) => a.data.weight - b.data.weight);
 ---
 <Base title="Projects" description="Things I've built, broken, and learned from.">
-  <div class="container" style="padding-top:4rem; padding-bottom:5rem;">
-    <h1 style="font-size:2rem; font-weight:700; letter-spacing:-0.03em; margin-bottom:0.5rem;">Projects</h1>
-    <p style="color:var(--muted); margin-bottom:3rem;">
-      Things I've built, broken, and learned from.
-    </p>
+  <div class="container page-container">
+    <h1 class="page-title">Projects</h1>
+    <p class="page-subtitle">Things I've built, broken, and learned from.</p>
 
     <div class="project-grid">
       {projects.map(project => (

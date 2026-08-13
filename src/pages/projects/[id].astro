@@ -13,8 +13,9 @@ const { Content } = await render(project);
 <Post
   title={project.data.title}
   description={project.data.description}
-  date={new Date()}
   tags={project.data.tags}
+  backLabel="Projects"
+  backHref="/projects/"
 >
   <Content />
 </Post>

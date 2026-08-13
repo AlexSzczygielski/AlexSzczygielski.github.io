@@ -4,31 +4,39 @@ import Base from './Base.astro';
 interface Props {
   title: string;
   description: string;
-  date: Date;
   tags: string[];
+  date?: Date;
+  backLabel?: string;
+  backHref?: string;
 }
-const { title, description, date, tags } = Astro.props;
 
-const formatted = date.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+const {
+  title,
+  description,
+  tags,
+  date,
+  backLabel = 'Journal',
+  backHref = '/posts/',
+} = Astro.props;
+
+const formatted = date?.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
 ---
 <Base title={title} description={description}>
-  <div class="container" style="padding-top: 4rem; padding-bottom: 5rem;">
-    <a href="/posts/" style="font-size:0.85rem; color:var(--muted); display:inline-flex; align-items:center; gap:0.35rem; margin-bottom:2rem;">
-      ← Journal
-    </a>
+  <div class="container post-container">
+    <a href={backHref} class="back-link">← {backLabel}</a>
     <article>
       <header class="post-header">
         <h1>{title}</h1>
         <div class="post-meta">
-          <time datetime={date.toISOString()}>{formatted}</time>
+          {formatted && <time datetime={date!.toISOString()}>{formatted}</time>}
           {tags.length > 0 && (
             <div class="tags">
               {tags.map(t => <span class="tag">{t}</span>)}
             </div>
           )}
         </div>
-        <p style="color:var(--muted); font-size:1rem; line-height:1.65;">{description}</p>
-        <hr style="margin-top:1.5rem;" />
+        <p class="post-description">{description}</p>
+        <hr />
       </header>
       <div class="prose">
         <slot />
