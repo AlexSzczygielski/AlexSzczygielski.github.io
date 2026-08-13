@@ -127,4 +127,70 @@ const projects = (await getCollection('projects'))
       </div>
     </section>
   )}
+
+  <!-- ── Now & Timeline ── -->
+  <section class="section">
+    <div class="container">
+      <div class="now-grid">
+
+        <div class="now-col">
+          <h2 class="now-section-label">Currently</h2>
+          <div class="now-items">
+            <div class="now-item">
+              <span class="now-dot" aria-hidden="true"></span>
+              <div class="now-item-body">
+                <span class="now-item-title">Learning Java</span>
+                <div class="tags">
+                  <span class="tag">Spring Boot</span>
+                  <span class="tag">REST APIs</span>
+                  <span class="tag">System Design</span>
+                </div>
+              </div>
+            </div>
+            <div class="now-item">
+              <span class="now-dot" aria-hidden="true"></span>
+              <div class="now-item-body">
+                <span class="now-item-title">Building a homelab</span>
+                <div class="tags">
+                  <span class="tag">Docker</span>
+                  <span class="tag">Ansible</span>
+                  <span class="tag">Proxmox</span>
+                  <span class="tag">Networking</span>
+                  <span class="tag">VPNs</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="now-col">
+          <h2 class="now-section-label">Timeline</h2>
+          <div class="timeline">
+            <div class="timeline-item">
+              <span class="timeline-year">2025</span>
+              <div class="timeline-item-body">
+                <span class="timeline-title">First internship</span>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <span class="timeline-year">2026</span>
+              <div class="timeline-item-body">
+                <span class="timeline-title">B.Eng. — Electronics &amp; Telecommunications</span>
+              </div>
+            </div>
+            <div class="timeline-item timeline-item-active">
+              <span class="timeline-year">2026</span>
+              <div class="timeline-item-body">
+                <span class="timeline-title">Pursuing M.Eng.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="now-footer">
+        <a href="/about/" class="btn btn-alt">Full profile →</a>
+      </div>
+    </div>
+  </section>
 </Base>
