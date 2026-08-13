@@ -13,11 +13,11 @@ const {
 const fullTitle = title === 'Alex Szczygielski' ? title : `${title} — Alex Szczygielski`;
 
 const nav = [
-  { label: 'Journal',   href: '/posts/' },
-  { label: 'Projects',  href: '/projects/' },
-  { label: 'About',     href: '/about/' },
-  { label: 'GitHub',    href: 'https://github.com/AlexSzczygielski',   ext: true },
-  { label: 'LinkedIn',  href: 'https://www.linkedin.com/in/aleksander-szczygielski-505821367/', ext: true },
+  { label: 'Journal',  href: '/posts/' },
+  { label: 'Projects', href: '/projects/' },
+  { label: 'About',    href: '/about/' },
+  { label: 'GitHub',   href: 'https://github.com/AlexSzczygielski',  ext: true },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/aleksander-szczygielski-505821367/', ext: true },
 ];
 
 const current = Astro.url.pathname;
@@ -39,7 +39,9 @@ const current = Astro.url.pathname;
     <div class="container">
       <nav class="nav-inner" aria-label="Main navigation">
         <a href="/" class="nav-logo">Alex Szczygielski</a>
-        <ul class="nav-links">
+
+        <!-- desktop links -->
+        <ul class="nav-links" id="nav-menu">
           {nav.map(({ label, href, ext }) => (
             <li>
               <a
@@ -51,6 +53,13 @@ const current = Astro.url.pathname;
             </li>
           ))}
         </ul>
+
+        <!-- hamburger (mobile only) -->
+        <button class="nav-hamburger" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </nav>
     </div>
   </header>
@@ -73,5 +82,25 @@ const current = Astro.url.pathname;
   </footer>
 
 </div>
+
+<script>
+  const toggle = document.getElementById('nav-toggle')!;
+  const menu   = document.getElementById('nav-menu')!;
+
+  toggle.addEventListener('click', () => {
+    const open = menu.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.classList.toggle('open', open);
+  });
+
+  // close menu when a link is clicked
+  menu.querySelectorAll('a').forEach(a =>
+    a.addEventListener('click', () => {
+      menu.classList.remove('open');
+      toggle.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    })
+  );
+</script>
 </body>
 </html>
