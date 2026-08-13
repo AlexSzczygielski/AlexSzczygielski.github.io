@@ -426,6 +426,64 @@ img { max-width: 100%; display: block; }
   font-variant-numeric: tabular-nums;
 }
 
+/* ── Post cards (homepage) ── */
+.post-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+  gap: 1rem;
+}
+
+.post-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 1.4rem;
+  border-radius: var(--radius);
+  border-top: 3px solid var(--accent);
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  border-left: 1px solid var(--border);
+  transition: transform 0.16s ease, box-shadow 0.16s ease, border-top-color 0.16s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.post-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+  border-top-color: var(--grad-to);
+}
+
+.post-card:active {
+  transform: scale(0.98);
+  transition-duration: 80ms;
+  box-shadow: none;
+}
+
+.post-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.post-card-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  line-height: 1.35;
+  transition: color 0.16s ease;
+}
+
+.post-card:hover .post-card-title { color: var(--accent); }
+
+.post-card-desc {
+  font-size: 0.875rem;
+  color: var(--muted);
+  line-height: 1.6;
+  flex-grow: 1;
+}
+
 /* ── Project grid ── */
 .project-grid {
   display: grid;
@@ -761,7 +819,7 @@ img { max-width: 100%; display: block; }
   .btn { justify-content: center; width: 100%; }
   .post-row-meta .tag { display: none; }
   .footer-inner { flex-direction: column; gap: 0.5rem; text-align: center; }
-  .project-grid { grid-template-columns: 1fr; }
+  .project-grid, .post-card-grid { grid-template-columns: 1fr; }
 }
 
 /* ── Reduced motion ── */

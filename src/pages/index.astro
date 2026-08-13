@@ -78,16 +78,19 @@ const projects = (await getCollection('projects'))
           <span class="section-title">Latest Posts</span>
           <a href="/posts/" class="section-link">All posts →</a>
         </div>
-        <div class="post-list">
+        <div class="post-card-grid">
           {posts.map(post => (
-            <a href={`/posts/${post.id}/`} class="post-row">
-              <span class="post-row-title">{post.data.title}</span>
-              <span class="post-row-meta">
+            <a href={`/posts/${post.id}/`} class="post-card">
+              <div class="post-card-meta">
                 <span class="post-date">
-                  {post.data.date.toLocaleDateString('en-GB', { month: 'short', year: 'numeric' })}
+                  {post.data.date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
                 </span>
-                {post.data.tags.slice(0, 2).map(t => <span class="tag">{t}</span>)}
-              </span>
+                <div class="tags">
+                  {post.data.tags.slice(0, 2).map(t => <span class="tag">{t}</span>)}
+                </div>
+              </div>
+              <p class="post-card-title">{post.data.title}</p>
+              <p class="post-card-desc">{post.data.description}</p>
             </a>
           ))}
         </div>
