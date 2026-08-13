@@ -15,21 +15,57 @@ const projects = (await getCollection('projects'))
   <section class="hero">
     <div class="container">
       <div class="hero-inner">
-        <h1 class="hero-heading">
-          <span class="hero-name">Alex Szczygielski</span>
-          <span class="hero-role">Backend Engineer,<br>leaning DevOps &amp;<br>Cybersecurity</span>
-        </h1>
-        <p class="hero-tagline">
-          Electronics &amp; Telecommunications M.Eng. student building backend systems
-          and self-hosted infrastructure — Java, cloud, CI/CD, and security.
-          Write-ups here are the real debugging path, not the polished result.
-        </p>
-        <div class="hero-actions">
-          <a href="/posts/"    class="btn btn-brand">Read the Journal</a>
-          <a href="/projects/" class="btn btn-alt">View Projects</a>
-          <a href="https://www.linkedin.com/in/aleksander-szczygielski-505821367/"
-             target="_blank" rel="noopener" class="btn btn-alt">LinkedIn</a>
+
+        <div class="hero-content">
+          <h1 class="hero-heading">
+            <span class="hero-name">Alex Szczygielski</span>
+            <span class="hero-role">Backend Engineer,<br>leaning DevOps &amp;<br>Cybersecurity</span>
+          </h1>
+          <p class="hero-tagline">
+            Electronics &amp; Telecommunications M.Eng. student building backend systems
+            and self-hosted infrastructure — Java, cloud, CI/CD, and security.
+            Write-ups here are the real debugging path, not the polished result.
+          </p>
+          <div class="hero-actions">
+            <a href="/posts/"    class="btn btn-brand">Read the Journal</a>
+            <a href="/projects/" class="btn btn-alt">View Projects</a>
+            <a href="https://www.linkedin.com/in/aleksander-szczygielski-505821367/"
+               target="_blank" rel="noopener" class="btn btn-alt">LinkedIn</a>
+          </div>
         </div>
+
+        <div class="hero-terminal" aria-hidden="true">
+          <div class="terminal-chrome">
+            <span class="terminal-dot dot-red"></span>
+            <span class="terminal-dot dot-yellow"></span>
+            <span class="terminal-dot dot-green"></span>
+          </div>
+          <div class="terminal-body">
+            <p class="terminal-line">
+              <span class="t-prompt">~&nbsp;$</span>
+              <span class="t-cmd"> whoami</span>
+            </p>
+            <p class="t-out">alex — backend eng</p>
+
+            <p class="terminal-line">
+              <span class="t-prompt">~&nbsp;$</span>
+              <span class="t-cmd"> cat interests.txt</span>
+            </p>
+            <p class="t-out">java · spring-boot<br>docker · linux · aws<br>ctf · security</p>
+
+            <p class="terminal-line">
+              <span class="t-prompt">~&nbsp;$</span>
+              <span class="t-cmd"> ls homelab/</span>
+            </p>
+            <p class="t-out">proxmox/&nbsp;&nbsp;nginx/&nbsp;&nbsp;monitoring/</p>
+
+            <p class="terminal-line">
+              <span class="t-prompt">~&nbsp;$</span>
+              <span class="terminal-cursor"></span>
+            </p>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
