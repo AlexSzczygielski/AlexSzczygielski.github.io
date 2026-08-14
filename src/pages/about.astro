@@ -3,114 +3,121 @@ import Base from '../layouts/Base.astro';
 ---
 <Base title="About" description="About Alex Szczygielski — backend engineer in training.">
   <div class="container page-container">
+    <div class="about-layout">
 
-    <!-- ── Header ── -->
-    <div class="about-header">
-      <div class="about-avatar" aria-hidden="true">AS</div>
-      <div class="about-header-text">
-        <h1 class="about-name">Alex Szczygielski</h1>
-        <p class="about-role">Backend Engineer &middot; DevOps &middot; Cybersecurity</p>
+      <!-- ── Left column ── -->
+      <div class="about-left">
+
+        <div class="about-header">
+          <div class="about-avatar" aria-hidden="true">AS</div>
+          <div class="about-header-text">
+            <h1 class="about-name">Alex Szczygielski</h1>
+            <p class="about-role">Backend Engineer &middot; DevOps &middot; Cybersecurity</p>
+          </div>
+        </div>
+
+        <div class="about-bio">
+          <p>
+            I'm a developer with a strong interest in <strong>backend engineering</strong>,
+            <strong>DevOps</strong>, and <strong>cybersecurity/cloud</strong> infrastructure.
+            I learn by doing — setting up homelab environments, digging into how systems
+            actually work, and writing about the hard parts.
+          </p>
+          <p>
+            This blog is where I document real problems I've run into and how I solved them.
+            No fluff — just the issue, the process, and what I learned.
+          </p>
+        </div>
+
+        <section class="about-section">
+          <h2 class="about-section-label">Links</h2>
+          <div class="social-cards">
+            <a href="https://github.com/AlexSzczygielski" target="_blank" rel="noopener" class="social-card">
+              <span class="social-card-name">GitHub</span>
+              <span class="social-card-handle">@AlexSzczygielski</span>
+              <span class="social-card-arrow">↗</span>
+            </a>
+            <a href="https://www.linkedin.com/in/aleksander-szczygielski-505821367/" target="_blank" rel="noopener" class="social-card">
+              <span class="social-card-name">LinkedIn</span>
+              <span class="social-card-handle">aleksander-szczygielski</span>
+              <span class="social-card-arrow">↗</span>
+            </a>
+          </div>
+        </section>
+
       </div>
+
+      <!-- ── Right column ── -->
+      <div class="about-right">
+
+        <section class="about-section">
+          <h2 class="about-section-label">Focus Areas</h2>
+          <div class="focus-grid">
+            <div class="focus-card">
+              <span class="focus-glyph">&#123;_&#125;</span>
+              <h3 class="focus-title">Backend</h3>
+              <p class="focus-desc">Java, Spring Boot, REST APIs, and system design. Building things that run reliably at scale.</p>
+            </div>
+            <div class="focus-card">
+              <span class="focus-glyph">$_</span>
+              <h3 class="focus-title">DevOps / Cloud</h3>
+              <p class="focus-desc">Docker, Linux, CI/CD pipelines, AWS. Self-hosted infrastructure as a learning environment.</p>
+            </div>
+            <div class="focus-card">
+              <span class="focus-glyph">#_</span>
+              <h3 class="focus-title">Cybersecurity</h3>
+              <p class="focus-desc">CTF challenges, network fundamentals, and security hardening. Understanding systems by breaking them.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="about-section">
+          <h2 class="about-section-label">Stack</h2>
+          <div class="stack-groups">
+            <div class="stack-group">
+              <span class="stack-label">Languages</span>
+              <div class="tags">
+                <span class="tag">Java</span>
+                <span class="tag">Python</span>
+                <span class="tag">Bash</span>
+              </div>
+            </div>
+            <div class="stack-group">
+              <span class="stack-label">Backend</span>
+              <div class="tags">
+                <span class="tag">Spring Boot</span>
+                <span class="tag">REST APIs</span>
+              </div>
+            </div>
+            <div class="stack-group">
+              <span class="stack-label">Infrastructure</span>
+              <div class="tags">
+                <span class="tag">Docker</span>
+                <span class="tag">Linux</span>
+                <span class="tag">Git</span>
+                <span class="tag">GitHub Actions</span>
+              </div>
+            </div>
+            <div class="stack-group">
+              <span class="stack-label">Cloud</span>
+              <div class="tags">
+                <span class="tag">AWS</span>
+                <span class="tag">Self-hosted</span>
+              </div>
+            </div>
+            <div class="stack-group">
+              <span class="stack-label">Tools</span>
+              <div class="tags">
+                <span class="tag">IntelliJ</span>
+                <span class="tag">Vim</span>
+                <span class="tag">Wireshark</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
     </div>
-
-    <!-- ── Bio ── -->
-    <div class="about-bio">
-      <p>
-        I'm a developer with a strong interest in <strong>backend engineering</strong>,
-        <strong>DevOps</strong>, and <strong>cybersecurity/cloud</strong> infrastructure.
-        I learn by doing — setting up homelab environments, digging into how systems
-        actually work, and writing about the hard parts.
-      </p>
-      <p>
-        This blog is where I document real problems I've run into and how I solved them.
-        No fluff — just the issue, the process, and what I learned.
-      </p>
-    </div>
-
-    <!-- ── Focus areas ── -->
-    <section class="about-section">
-      <h2 class="about-section-label">Focus Areas</h2>
-      <div class="focus-grid">
-        <div class="focus-card">
-          <span class="focus-glyph">{ }</span>
-          <h3 class="focus-title">Backend</h3>
-          <p class="focus-desc">Java, Spring Boot, REST APIs, and system design. Building things that run reliably at scale.</p>
-        </div>
-        <div class="focus-card">
-          <span class="focus-glyph">$_</span>
-          <h3 class="focus-title">DevOps / Cloud</h3>
-          <p class="focus-desc">Docker, Linux, CI/CD pipelines, AWS. Self-hosted infrastructure as a learning environment.</p>
-        </div>
-        <div class="focus-card">
-          <span class="focus-glyph">#_</span>
-          <h3 class="focus-title">Cybersecurity</h3>
-          <p class="focus-desc">CTF challenges, network fundamentals, and security hardening. Understanding systems by breaking them.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ── Stack ── -->
-    <section class="about-section">
-      <h2 class="about-section-label">Stack</h2>
-      <div class="stack-groups">
-        <div class="stack-group">
-          <span class="stack-label">Languages</span>
-          <div class="tags">
-            <span class="tag">Java</span>
-            <span class="tag">Python</span>
-            <span class="tag">Bash</span>
-          </div>
-        </div>
-        <div class="stack-group">
-          <span class="stack-label">Backend</span>
-          <div class="tags">
-            <span class="tag">Spring Boot</span>
-            <span class="tag">REST APIs</span>
-          </div>
-        </div>
-        <div class="stack-group">
-          <span class="stack-label">Infrastructure</span>
-          <div class="tags">
-            <span class="tag">Docker</span>
-            <span class="tag">Linux</span>
-            <span class="tag">Git</span>
-            <span class="tag">GitHub Actions</span>
-          </div>
-        </div>
-        <div class="stack-group">
-          <span class="stack-label">Cloud</span>
-          <div class="tags">
-            <span class="tag">AWS</span>
-            <span class="tag">Self-hosted</span>
-          </div>
-        </div>
-        <div class="stack-group">
-          <span class="stack-label">Tools</span>
-          <div class="tags">
-            <span class="tag">IntelliJ</span>
-            <span class="tag">Vim</span>
-            <span class="tag">Wireshark</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ── Links ── -->
-    <section class="about-section">
-      <h2 class="about-section-label">Links</h2>
-      <div class="social-cards">
-        <a href="https://github.com/AlexSzczygielski" target="_blank" rel="noopener" class="social-card">
-          <span class="social-card-name">GitHub</span>
-          <span class="social-card-handle">@AlexSzczygielski</span>
-          <span class="social-card-arrow">↗</span>
-        </a>
-        <a href="https://www.linkedin.com/in/aleksander-szczygielski-505821367/" target="_blank" rel="noopener" class="social-card">
-          <span class="social-card-name">LinkedIn</span>
-          <span class="social-card-handle">aleksander-szczygielski</span>
-          <span class="social-card-arrow">↗</span>
-        </a>
-      </div>
-    </section>
-
   </div>
 </Base>

@@ -604,6 +604,35 @@ img { max-width: 100%; display: block; }
   border: 1px solid var(--tag-border);
 }
 
+/* ── About page layout ── */
+.about-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  gap: clamp(3rem, 6vw, 6rem);
+  align-items: start;
+}
+
+.about-left {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  position: sticky;
+  top: 5rem;
+}
+
+.about-right {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+@media (max-width: 48rem) {
+  .about-layout {
+    grid-template-columns: 1fr;
+  }
+  .about-left { position: static; }
+}
+
 /* ── About page ── */
 .about-header {
   display: flex;
