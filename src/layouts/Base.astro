@@ -1,0 +1,110 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+const {
+  title = 'Alex Szczygielski',
+  description = 'Backend, DevOps, and cybersecurity — projects and write-ups.',
+} = Astro.props;
+
+const fullTitle = title === 'Alex Szczygielski' ? title : `${title} — Alex Szczygielski`;
+
+const nav = [
+  { label: 'Journal',  href: '/posts/' },
+  { label: 'Projects', href: '/projects/' },
+  { label: 'About',    href: '/about/' },
+  { label: 'GitHub',   href: 'https://github.com/AlexSzczygielski',  ext: true },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/aleksander-szczygielski-505821367/', ext: true },
+];
+
+const current = Astro.url.pathname;
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{fullTitle}</title>
+  <meta name="description" content={description} />
+  <meta name="author" content="Alex Szczygielski" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0f0f11" media="(prefers-color-scheme: dark)" />
+</head>
+<body>
+<div class="site-wrapper">
+
+  <a href="#main-content" class="skip-link">Skip to content</a>
+
+  <header class="nav">
+    <div class="container">
+      <nav class="nav-inner" aria-label="Main navigation">
+        <a href="/" class="nav-logo">Alex Szczygielski</a>
+
+        <!-- desktop links -->
+        <ul class="nav-links" id="nav-menu">
+          {nav.map(({ label, href, ext }) => (
+            <li>
+              <a
+                href={href}
+                class={ext ? 'nav-ext' : ''}
+                aria-current={!ext && current.startsWith(href) ? 'page' : undefined}
+                {...(ext ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+              >{label}</a>
+            </li>
+          ))}
+        </ul>
+
+        <!-- hamburger (mobile only) -->
+        <button class="nav-hamburger" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <slot />
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <span>© {new Date().getFullYear()} Alex Szczygielski</span>
+        <div class="footer-links">
+          <a href="https://github.com/AlexSzczygielski" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://www.linkedin.com/in/aleksander-szczygielski-505821367/" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="/posts/">Journal</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  const toggle = document.getElementById('nav-toggle')!;
+  const menu   = document.getElementById('nav-menu')!;
+
+  toggle.addEventListener('click', () => {
+    const open = menu.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.classList.toggle('open', open);
+  });
+
+  // close menu when a link is clicked
+  menu.querySelectorAll('a').forEach(a =>
+    a.addEventListener('click', () => {
+      menu.classList.remove('open');
+      toggle.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    })
+  );
+</script>
+</body>
+</html>

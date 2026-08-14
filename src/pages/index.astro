@@ -1,0 +1,196 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('posts', p => !p.data.draft))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 4);
+
+const projects = (await getCollection('projects'))
+  .sort((a, b) => a.data.weight - b.data.weight)
+  .slice(0, 3);
+---
+<Base>
+  <!-- ── Hero ── -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-inner">
+
+        <div class="hero-content">
+          <h1 class="hero-heading">
+            <span class="hero-name">Alex Szczygielski</span>
+            <span class="hero-role">Backend Engineer,<br>leaning DevOps &amp;<br>Cybersecurity</span>
+          </h1>
+          <p class="hero-tagline">
+            Electronics &amp; Telecommunications M.Eng. student building backend systems
+            and self-hosted infrastructure — Java, cloud, CI/CD, and security.
+            Write-ups here are the real debugging path, not the polished result.
+          </p>
+          <div class="hero-actions">
+            <a href="/posts/"    class="btn btn-brand">Read the Journal</a>
+            <a href="/projects/" class="btn btn-alt">View Projects</a>
+            <a href="https://www.linkedin.com/in/aleksander-szczygielski-505821367/"
+               target="_blank" rel="noopener" class="btn btn-alt">LinkedIn</a>
+          </div>
+        </div>
+
+        <div class="hero-terminal" aria-hidden="true">
+          <div class="terminal-chrome">
+            <span class="terminal-dot dot-red"></span>
+            <span class="terminal-dot dot-yellow"></span>
+            <span class="terminal-dot dot-green"></span>
+          </div>
+          <div class="terminal-body">
+            <p class="terminal-line">
+              <span class="t-prompt">~&nbsp;$</span>
+              <span class="t-cmd"> whoami</span>
+            </p>
+            <p class="t-out">alex — backend eng</p>
+
+            <p class="terminal-line">
+              <span class="t-prompt">~&nbsp;$</span>
+              <span class="t-cmd"> cat interests.txt</span>
+            </p>
+            <p class="t-out">java · spring-boot<br>docker · linux · aws<br>ctf · security</p>
+
+            <p class="terminal-line">
+              <span class="t-prompt">~&nbsp;$</span>
+              <span class="t-cmd"> ls homelab/</span>
+            </p>
+            <p class="t-out">proxmox/&nbsp;&nbsp;nginx/&nbsp;&nbsp;monitoring/</p>
+
+            <p class="terminal-line">
+              <span class="t-prompt">~&nbsp;$</span>
+              <span class="terminal-cursor"></span>
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Featured projects ── -->
+  {projects.length > 0 && (
+    <section class="section" style="padding-top:0;">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-title">Projects</span>
+          <a href="/projects/" class="section-link">All projects →</a>
+        </div>
+        <div class="project-grid">
+          {projects.map(project => (
+            <a href={`/projects/${project.id}/`} class="project-card">
+              <div class="project-card-top">
+                <span class="project-card-title">{project.data.title}</span>
+                <span class={`status status-${project.data.status.replace(' ', '-')}`}>
+                  {project.data.status}
+                </span>
+              </div>
+              <p class="project-card-desc">{project.data.description}</p>
+              {project.data.tags.length > 0 && (
+                <div class="tags">
+                  {project.data.tags.slice(0, 4).map(t => <span class="tag">{t}</span>)}
+                </div>
+              )}
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- ── Recent posts ── -->
+  {posts.length > 0 && (
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-title">Latest Posts</span>
+          <a href="/posts/" class="section-link">All posts →</a>
+        </div>
+        <div class="post-card-grid">
+          {posts.map(post => (
+            <a href={`/posts/${post.id}/`} class="post-card">
+              <div class="post-card-meta">
+                <span class="post-date">
+                  {post.data.date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
+                </span>
+                <div class="tags">
+                  {post.data.tags.slice(0, 2).map(t => <span class="tag">{t}</span>)}
+                </div>
+              </div>
+              <p class="post-card-title">{post.data.title}</p>
+              <p class="post-card-desc">{post.data.description}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- ── Now & Timeline ── -->
+  <section class="section">
+    <div class="container">
+      <div class="now-grid">
+
+        <div class="now-col">
+          <h2 class="now-section-label">Currently</h2>
+          <div class="now-items">
+            <div class="now-item">
+              <span class="now-dot" aria-hidden="true"></span>
+              <div class="now-item-body">
+                <span class="now-item-title">Learning Java</span>
+                <div class="tags">
+                  <span class="tag">Spring Boot</span>
+                  <span class="tag">REST APIs</span>
+                  <span class="tag">System Design</span>
+                </div>
+              </div>
+            </div>
+            <div class="now-item">
+              <span class="now-dot" aria-hidden="true"></span>
+              <div class="now-item-body">
+                <span class="now-item-title">Building a homelab</span>
+                <div class="tags">
+                  <span class="tag">Docker</span>
+                  <span class="tag">Ansible</span>
+                  <span class="tag">Proxmox</span>
+                  <span class="tag">Networking</span>
+                  <span class="tag">VPNs</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="now-col">
+          <h2 class="now-section-label">Timeline</h2>
+          <div class="timeline">
+            <div class="timeline-item">
+              <span class="timeline-year">2025</span>
+              <div class="timeline-item-body">
+                <span class="timeline-title">First internship</span>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <span class="timeline-year">2026</span>
+              <div class="timeline-item-body">
+                <span class="timeline-title">B.Eng. — Electronics &amp; Telecommunications</span>
+              </div>
+            </div>
+            <div class="timeline-item timeline-item-active">
+              <span class="timeline-year">2026</span>
+              <div class="timeline-item-body">
+                <span class="timeline-title">Pursuing M.Eng.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="now-footer">
+        <a href="/about/" class="btn btn-alt">Full profile →</a>
+      </div>
+    </div>
+  </section>
+</Base>

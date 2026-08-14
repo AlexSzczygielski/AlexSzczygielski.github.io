@@ -1,0 +1,30 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('posts', p => !p.data.draft))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+<Base title="Journal" description="Write-ups on backend, DevOps, cloud, and security.">
+  <div class="container page-container">
+    <h1 class="page-title">Journal</h1>
+    <p class="page-subtitle">Real problems, real debugging paths. Not the polished result.</p>
+
+    <div class="post-list">
+      {posts.map(post => (
+        <a href={`/posts/${post.id}/`} class="post-row">
+          <div class="post-row-content">
+            <span class="post-row-title">{post.data.title}</span>
+            <span class="post-row-desc">{post.data.description}</span>
+          </div>
+          <span class="post-row-meta">
+            <span class="post-date">
+              {post.data.date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
+            </span>
+            {post.data.tags.slice(0, 2).map(t => <span class="tag">{t}</span>)}
+          </span>
+        </a>
+      ))}
+    </div>
+  </div>
+</Base>

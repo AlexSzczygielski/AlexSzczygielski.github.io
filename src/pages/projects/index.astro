@@ -1,0 +1,36 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const projects = (await getCollection('projects'))
+  .sort((a, b) => a.data.weight - b.data.weight);
+---
+<Base title="Projects" description="Things I've built, broken, and learned from.">
+  <div class="container page-container">
+    <h1 class="page-title">Projects</h1>
+    <p class="page-subtitle">Things I've built, broken, and learned from.</p>
+
+    <div class="project-grid">
+      {projects.map(project => (
+        <a href={`/projects/${project.id}/`} class="project-card">
+          <div class="project-card-top">
+            <span class="project-card-title">{project.data.title}</span>
+            <span class={`status status-${project.data.status.replace(' ', '-')}`}>
+              {project.data.status}
+            </span>
+          </div>
+          <p class="project-card-desc">{project.data.description}</p>
+          {project.data.tags.length > 0 && (
+            <div class="tags">
+              {project.data.tags.map(t => <span class="tag">{t}</span>)}
+            </div>
+          )}
+          <div class="project-card-links">
+            <span class="project-card-link">Read more →</span>
+            {project.data.github && <span class="project-card-link">GitHub ↗</span>}
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</Base>
