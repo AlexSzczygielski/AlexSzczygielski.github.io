@@ -262,7 +262,8 @@ img { max-width: 100%; display: block; }
   height: 1.1em;
   background: #4ade80;
   border-radius: 1px;
-  vertical-align: text-bottom;
+  position: relative;
+  top: 0.1em;
   animation: cursor-blink 1s step-end infinite;
 }
 
