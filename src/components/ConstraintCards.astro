@@ -1,0 +1,90 @@
+---
+interface Constraint {
+  icon: string;
+  title: string;
+  problem: string;
+  solution: string;
+}
+interface Props {
+  constraints: Constraint[];
+}
+const { constraints } = Astro.props;
+---
+<div class="constraint-grid">
+  {constraints.map(c => (
+    <div class="constraint-card">
+      <div class="constraint-top">
+        <span class="constraint-icon">{c.icon}</span>
+        <p class="constraint-title">{c.title}</p>
+        <p class="constraint-problem">{c.problem}</p>
+      </div>
+      <div class="constraint-solution">
+        <span class="solution-arrow">→</span>
+        <p>{c.solution}</p>
+      </div>
+    </div>
+  ))}
+</div>
+
+<style>
+  .constraint-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto;
+    gap: 0 0.75rem;
+    margin: 1.5rem 0;
+  }
+  .constraint-card {
+    display: grid;
+    grid-row: span 2;
+    grid-template-rows: subgrid;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 0.75rem;
+  }
+  .constraint-top {
+    padding: 1rem;
+    background: var(--bg-card);
+  }
+  .constraint-icon {
+    font-size: 1.5rem;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  .constraint-title {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--text);
+    margin: 0 0 0.4rem !important;
+  }
+  .constraint-problem {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin: 0 !important;
+    line-height: 1.5;
+  }
+  .constraint-solution {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    border-top: 1px solid var(--border);
+    background: var(--bg);
+    font-size: 0.8rem;
+    color: var(--text);
+    line-height: 1.5;
+  }
+  .solution-arrow {
+    color: var(--accent);
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 0.05rem;
+  }
+  .constraint-solution p {
+    margin: 0 !important;
+    color: var(--text);
+  }
+  @media (max-width: 640px) {
+    .constraint-grid { grid-template-columns: 1fr; }
+  }
+</style>
