@@ -31,8 +31,8 @@ const current = Astro.url.pathname;
   <meta name="description" content={description} />
   <meta name="author" content="Alex Szczygielski" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
-  <meta name="theme-color" content="#0f0f11" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#EFECE3" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0C0C0C" media="(prefers-color-scheme: dark)" />
 </head>
 <body>
 <div class="site-wrapper">
@@ -97,7 +97,7 @@ const current = Astro.url.pathname;
     toggle.classList.toggle('open', open);
   });
 
-  // close menu when a link is clicked
+  // close menu when a link is clicked or Esc is pressed
   menu.querySelectorAll('a').forEach(a =>
     a.addEventListener('click', () => {
       menu.classList.remove('open');
@@ -105,6 +105,15 @@ const current = Astro.url.pathname;
       toggle.setAttribute('aria-expanded', 'false');
     })
   );
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && menu.classList.contains('open')) {
+      menu.classList.remove('open');
+      toggle.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.focus();
+    }
+  });
 </script>
 </body>
 </html>
