@@ -950,9 +950,7 @@ img { max-width: 100%; display: block; }
 }
 
 /* ── Prose (markdown posts) ── */
-.prose {
-  max-width: 68ch;
-}
+.prose {}
 
 .prose h1 { font-size: 2.2rem; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 0.5rem; }
 .prose h2 { font-size: 1.4rem; font-weight: 600; letter-spacing: -0.02em; margin: 2.5rem 0 0.75rem; }
@@ -987,6 +985,18 @@ img { max-width: 100%; display: block; }
   color: var(--text);
   padding: 0;
   font-size: 0.875rem;
+}
+
+.prose .mermaid-diagram {
+  margin: 1.5rem 0;
+  overflow-x: auto;
+}
+
+.prose .mermaid-diagram svg {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
 }
 
 .prose blockquote {
@@ -1069,6 +1079,11 @@ img { max-width: 100%; display: block; }
 .post-container {
   padding-top: 4rem;
   padding-bottom: 5rem;
+}
+
+.post-inner {
+  max-width: clamp(640px, 82vw, 1100px);
+  margin: 0 auto;
 }
 
 .back-link {

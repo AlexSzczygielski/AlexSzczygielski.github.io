@@ -23,24 +23,50 @@ const formatted = date?.toLocaleDateString('en-GB', { day: 'numeric', month: 'lo
 ---
 <Base title={title} description={description}>
   <div class="container post-container">
-    <a href={backHref} class="back-link">← {backLabel}</a>
-    <article>
-      <header class="post-header">
-        <h1>{title}</h1>
-        <div class="post-meta">
-          {formatted && <time datetime={date!.toISOString()}>{formatted}</time>}
-          {tags.length > 0 && (
-            <div class="tags">
-              {tags.map(t => <span class="tag">{t}</span>)}
-            </div>
-          )}
+    <div class="post-inner">
+      <a href={backHref} class="back-link">← {backLabel}</a>
+      <article>
+        <header class="post-header">
+          <h1>{title}</h1>
+          <div class="post-meta">
+            {formatted && <time datetime={date!.toISOString()}>{formatted}</time>}
+            {tags.length > 0 && (
+              <div class="tags">
+                {tags.map(t => <span class="tag">{t}</span>)}
+              </div>
+            )}
+          </div>
+          <p class="post-description">{description}</p>
+          <hr />
+        </header>
+        <div class="prose">
+          <slot />
         </div>
-        <p class="post-description">{description}</p>
-        <hr />
-      </header>
-      <div class="prose">
-        <slot />
-      </div>
-    </article>
+      </article>
+    </div>
   </div>
 </Base>
+
+<script>
+  const blocks = document.querySelectorAll<HTMLPreElement>('pre[data-language="mermaid"]');
+
+  if (blocks.length) {
+    const { default: mermaid } = await import('mermaid');
+    const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    mermaid.initialize({
+      startOnLoad: false,
+      securityLevel: 'strict',
+      theme: isDark ? 'dark' : 'default',
+    });
+
+    blocks.forEach(async (pre, i) => {
+      const source = pre.textContent ?? '';
+      const { svg } = await mermaid.render(`mermaid-diagram-${i}`, source);
+      const container = document.createElement('div');
+      container.className = 'mermaid-diagram';
+      container.innerHTML = svg;
+      pre.replaceWith(container);
+    });
+  }
+</script>

@@ -80,7 +80,7 @@ Building a homelab behind ISP's CGNAT, on a shared household network, without op
 
 Hardware required to run a homelab can be split into a few categories, each of which serve a specific purpose. This section explains my design decisions for each of the most important categories.
 
-### Compute
+### Compute hardware
 
 > "Compute" - the processing resources that actually run workloads — CPU, RAM, and the hypervisor/OS layer that executes VMs and containers.
 
@@ -107,7 +107,7 @@ These machines are most often leased by commercial companies, which means that e
 
 Everything that runs on it is either virtualized or containerized (LXC) by a Proxmox hypervisor.
 
-### Storage
+### Storage hardware
 
 > Storage - the persistent layer - where data lives when nothing's actively running it. It's the counterpart to compute: compute is the CPU/RAM doing work right now, storage is the disk holding data whether or not anything's touching it at this moment.
 
@@ -115,42 +115,13 @@ Currently a specific storage unit is under a development phase. It has to store 
 
 To follow a 3-2-1 rule of backups, the implementation of a remote storage - either off site on another self hosted platform or in cloud is also in plans.
 
-### Network
+### Network hardware
 
 > Network - the layer that lets compute and storage talk to each other and to the outside world - the wiring, addressing, and routing that turns a pile of separate machines into one system.
 
-For now the network runs entirely on the ISP-issued router. A managed switch (for VLANs / traffic segmentation) in tandem with router capable of running pfsense or opensense OS is the next step. As ISP's router does not allow bridging, I will be looking into the `double NAT` solution. Right now everything that needs isolation gets it in software instead, one layer up.
+For now the network runs entirely on the ISP-issued router. A managed switch (for VLANs / traffic segmentation) in tandem with router capable of running pfsense or opensense OS is the next step. As ISP's router does not allow bridging, I will be looking into the `double NAT` configuration. 
 
-Everything sits on one flat physical layer today - segmentation, where it exists, is enforced one layer up:
-
-```mermaid
-graph TD
-    subgraph Physical[Physical layer — flat, unsegmented]
-        Router[ISP Router<br/>single switch/Wi-Fi, no VLANs]
-        PVE[Proxmox VE]
-        Docker[Docker VM]
-        Pi[Raspberry Pi]
-        Laptop[Acer Laptop]
-    end
-
-    subgraph Software[Software layer — segmentation happens here]
-        DockerNet[Docker networking<br/>per-stack isolation]
-        DNS[DNS-level routing<br/>details later]
-    end
-
-    Router --- PVE
-    Router --- Pi
-    Router --- Laptop
-    PVE --- Docker
-
-    Docker -.->|isolation enforced above,<br/>not at the switch| Software
-
-    classDef physical fill:#4a90d9,stroke:#2c5f8a,color:#fff
-    classDef software fill:#e8a33d,stroke:#b5791f,color:#fff
-
-    class Router,PVE,Docker,Pi,Laptop physical
-    class DockerNet,DNS software
-```
+It is impossible to build the entire homelab at once, thus network devices are waiting for their turn. Right now if there ever was an urgent need I could enforce some isolation in the software layer instead - using docker networking.
 
 ### Other devices
 A Raspberry Pi 4B sits on the network to act as a very primitive KVM, which can remotely turn on other devices on the network. It is a part of my experiment to write a custom wake on lan script that uses VPS relay and polling technique to wake other machines, without exposing any shell or without having any remote access to the network.
