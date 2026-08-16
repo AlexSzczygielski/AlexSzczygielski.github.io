@@ -1,0 +1,98 @@
+---
+---
+<figure class="net-diagram">
+  <svg viewBox="0 0 640 370" xmlns="http://www.w3.org/2000/svg" aria-label="Home network topology">
+    <style>
+      .nd-line       { stroke: var(--border); stroke-width: 1.5; }
+      .nd-cluster    { fill: none; stroke: var(--border); stroke-dasharray: 5 3; stroke-width: 1.5; }
+      .nd-lbl        { fill: var(--muted); font-size: 11px; font-family: var(--font-mono); }
+      .nd-rect       { fill: var(--bg); stroke: var(--border); stroke-width: 1.5; }
+      .nd-rect-hi    { fill: var(--bg); stroke: var(--accent); stroke-width: 2; }
+      .nd-name       { fill: var(--text); font-size: 13px; font-weight: 600; font-family: var(--font-sans); text-anchor: middle; }
+      .nd-sub        { fill: var(--muted); font-size: 11px; font-family: var(--font-mono); text-anchor: middle; }
+      .nd-ts         { fill: #0ea5e9; }
+      .nd-ts-text    { fill: #fff; font-size: 9px; font-weight: 700; font-family: var(--font-sans); text-anchor: middle; dominant-baseline: central; }
+      .nd-leg-text   { fill: var(--muted); font-size: 11px; font-family: var(--font-sans); dominant-baseline: central; }
+    </style>
+
+    <!-- Proxmox host cluster -->
+    <rect class="nd-cluster" x="22" y="168" width="178" height="168" rx="10"/>
+    <text class="nd-lbl" x="30" y="184">Proxmox Host</text>
+
+    <!-- Lines (drawn behind nodes) -->
+    <line class="nd-line" x1="320" y1="30"  x2="320" y2="120"/>
+    <line class="nd-line" x1="320" y1="120" x2="110" y2="215"/>
+    <line class="nd-line" x1="320" y1="120" x2="320" y2="215"/>
+    <line class="nd-line" x1="320" y1="120" x2="530" y2="215"/>
+    <line class="nd-line" x1="110" y1="215" x2="110" y2="305"/>
+
+    <!-- ISP -->
+    <g>
+      <rect class="nd-rect" x="240" y="9"   width="160" height="42" rx="8"/>
+      <text class="nd-name" x="320" y="26">ISP</text>
+      <text class="nd-sub"  x="320" y="41">CGNAT / DS-Lite</text>
+    </g>
+
+    <!-- Router -->
+    <g>
+      <rect class="nd-rect" x="240" y="99"  width="160" height="42" rx="8"/>
+      <text class="nd-name" x="320" y="116">Router</text>
+      <text class="nd-sub"  x="320" y="131">192.168.0.1</text>
+    </g>
+
+    <!-- Proxmox VE -->
+    <g>
+      <rect class="nd-rect" x="30"  y="194" width="160" height="42" rx="8"/>
+      <text class="nd-name" x="110" y="211">Proxmox VE</text>
+      <text class="nd-sub"  x="110" y="226">192.168.0.5</text>
+      <rect class="nd-ts" x="170" y="192" width="20" height="14" rx="3"/>
+      <text class="nd-ts-text" x="180" y="199">TS</text>
+    </g>
+
+    <!-- Docker VM (highlighted — all services live here) -->
+    <g>
+      <rect class="nd-rect-hi" x="30"  y="284" width="160" height="42" rx="8"/>
+      <text class="nd-name" x="110" y="301">Docker VM</text>
+      <text class="nd-sub"  x="110" y="316">192.168.0.136</text>
+      <rect class="nd-ts" x="170" y="282" width="20" height="14" rx="3"/>
+      <text class="nd-ts-text" x="180" y="289">TS</text>
+    </g>
+
+    <!-- Raspberry Pi -->
+    <g>
+      <rect class="nd-rect" x="240" y="194" width="160" height="42" rx="8"/>
+      <text class="nd-name" x="320" y="211">Raspberry Pi</text>
+      <text class="nd-sub"  x="320" y="226">Wake-on-LAN</text>
+    </g>
+
+    <!-- Laptop -->
+    <g>
+      <rect class="nd-rect" x="450" y="194" width="160" height="42" rx="8"/>
+      <text class="nd-name" x="530" y="211">Acer Laptop</text>
+      <text class="nd-sub"  x="530" y="226">192.168.0.228</text>
+    </g>
+
+    <!-- Legend -->
+    <rect class="nd-ts" x="22" y="347" width="20" height="14" rx="3"/>
+    <text class="nd-ts-text" x="32" y="354">TS</text>
+    <text class="nd-leg-text" x="48" y="354">Tailscale node</text>
+
+    <rect fill="none" stroke="var(--accent)" stroke-width="2" x="160" y="347" width="20" height="14" rx="3"/>
+    <text class="nd-leg-text" x="186" y="354">Services run here</text>
+  </svg>
+</figure>
+
+<style>
+  .net-diagram {
+    margin: 1.5rem 0;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--bg-card);
+    padding: 1rem 0.5rem 0.5rem;
+  }
+  .net-diagram svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+</style>
