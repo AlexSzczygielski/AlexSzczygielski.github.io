@@ -4,7 +4,7 @@ import { getCollection } from 'astro:content';
 
 const posts = (await getCollection('posts', p => !p.data.draft))
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
-  .slice(0, 4);
+  .slice(0, 3);
 
 const projects = (await getCollection('projects'))
   .sort((a, b) => a.data.weight - b.data.weight)
@@ -22,15 +22,13 @@ const projects = (await getCollection('projects'))
             <span class="hero-role">Backend Engineer,<br>leaning DevOps &amp;<br>Cybersecurity</span>
           </h1>
           <p class="hero-tagline">
-            Electronics &amp; Telecommunications M.Eng. student building backend systems
-            and self-hosted infrastructure — Java, cloud, CI/CD, and security.
-            Write-ups here are the real debugging path, not the polished result.
+            Building backend systems and self-hosted infrastructure —
+            Java, Spring Boot, Docker, AWS.
+            Electronics &amp; Telecommunications M.Eng.
           </p>
           <div class="hero-actions">
             <a href="/posts/"    class="btn btn-brand">Read the Journal</a>
             <a href="/projects/" class="btn btn-alt">View Projects</a>
-            <a href="https://www.linkedin.com/in/aleksander-szczygielski-505821367/"
-               target="_blank" rel="noopener" class="btn btn-alt">LinkedIn</a>
           </div>
         </div>
 
@@ -70,7 +68,7 @@ const projects = (await getCollection('projects'))
     </div>
   </section>
 
-  <!-- ── Featured projects ── -->
+  <!-- ── Projects ── -->
   {projects.length > 0 && (
     <section class="section" style="padding-top:0;">
       <div class="container">
@@ -105,13 +103,19 @@ const projects = (await getCollection('projects'))
     <section class="section">
       <div class="container">
         <div class="section-header">
-          <span class="section-title">Latest Posts</span>
+          <span class="section-title">Recent Posts</span>
           <a href="/posts/" class="section-link">All posts →</a>
         </div>
-        <div class="post-card-grid">
+        <div class="post-list">
           {posts.map(post => (
-            <a href={`/posts/${post.id}/`} class="post-card">
-              <div class="post-card-meta">
+            <a href={`/posts/${post.id}/`} class="post-row">
+              <div class="post-row-content">
+                <span class="post-row-title">{post.data.title}</span>
+                {post.data.description && (
+                  <span class="post-row-desc">{post.data.description}</span>
+                )}
+              </div>
+              <div class="post-row-meta">
                 <span class="post-date">
                   {post.data.date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
                 </span>
@@ -119,78 +123,10 @@ const projects = (await getCollection('projects'))
                   {post.data.tags.slice(0, 2).map(t => <span class="tag">{t}</span>)}
                 </div>
               </div>
-              <p class="post-card-title">{post.data.title}</p>
-              <p class="post-card-desc">{post.data.description}</p>
             </a>
           ))}
         </div>
       </div>
     </section>
   )}
-
-  <!-- ── Now & Timeline ── -->
-  <section class="section">
-    <div class="container">
-      <div class="now-grid">
-
-        <div class="now-col">
-          <h2 class="now-section-label">Currently</h2>
-          <div class="now-items">
-            <div class="now-item">
-              <span class="now-dot" aria-hidden="true"></span>
-              <div class="now-item-body">
-                <span class="now-item-title">Learning Java</span>
-                <div class="tags">
-                  <span class="tag">Spring Boot</span>
-                  <span class="tag">REST APIs</span>
-                  <span class="tag">System Design</span>
-                </div>
-              </div>
-            </div>
-            <div class="now-item">
-              <span class="now-dot" aria-hidden="true"></span>
-              <div class="now-item-body">
-                <span class="now-item-title">Building a homelab</span>
-                <div class="tags">
-                  <span class="tag">Docker</span>
-                  <span class="tag">Ansible</span>
-                  <span class="tag">Proxmox</span>
-                  <span class="tag">Networking</span>
-                  <span class="tag">VPNs</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="now-col">
-          <h2 class="now-section-label">Timeline</h2>
-          <div class="timeline">
-            <div class="timeline-item">
-              <span class="timeline-year">2025</span>
-              <div class="timeline-item-body">
-                <span class="timeline-title">First internship</span>
-              </div>
-            </div>
-            <div class="timeline-item">
-              <span class="timeline-year">2026</span>
-              <div class="timeline-item-body">
-                <span class="timeline-title">B.Eng. — Electronics &amp; Telecommunications</span>
-              </div>
-            </div>
-            <div class="timeline-item timeline-item-active">
-              <span class="timeline-year">2026</span>
-              <div class="timeline-item-body">
-                <span class="timeline-title">Pursuing M.Eng.</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-      <div class="now-footer">
-        <a href="/about/" class="btn btn-alt">Full profile →</a>
-      </div>
-    </div>
-  </section>
 </Base>
